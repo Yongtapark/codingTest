@@ -1,18 +1,7 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(int[] arr, int divisor) {
-        List<Integer> listAnswer = new ArrayList<>();
-        for(int arrs : arr){
-            if(arrs%divisor==0){
-                listAnswer.add(arrs);
-            }
-        }
-        if(listAnswer.isEmpty()){
-            listAnswer.add(-1);
-        }
-        Collections.sort(listAnswer);
-       int [] answer = listAnswer.stream().mapToInt(i->i).toArray();
-        return answer;
+         int[] result = Arrays.stream(arr).filter(factor -> factor % divisor == 0).sorted().toArray();
+        return result.length == 0 ? new int[]{-1} : result;
     }
 }
