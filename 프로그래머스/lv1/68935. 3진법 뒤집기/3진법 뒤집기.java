@@ -1,5 +1,8 @@
 class Solution {
     public int solution(int n) {
-        return Integer.parseInt(new StringBuilder(Integer.toString(n,3)).reverse().toString(),3);
+        int answer= 0;
+        String step1 = Integer.toString(n,3);
+        String step2 = new StringBuilder(step1).reverse().toString();
+        return Integer.parseInt(step2,3);
     }
 }
