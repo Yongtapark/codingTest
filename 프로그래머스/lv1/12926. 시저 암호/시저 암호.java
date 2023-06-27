@@ -1,19 +1,27 @@
 class Solution {
-    public String solution(String s, int n) {
-        StringBuilder result = new StringBuilder();
+   public String solution(String s, int n) {
+        String answer = "";
+        char[] chars = s.toCharArray();
+        for(int i=0; i<chars.length;i++){
+            int charToInt = chars[i]+n;
+            int i1 = charToInt - 26;
+            if('A'<= chars[i]&&'Z'>=chars[i]) {
+                if (charToInt > 'Z') {
+                    chars[i] = (char) i1;
+                }else {
+                    chars[i] = (char) charToInt;
+                }
+            }
 
-        for (char originalChar : s.toCharArray()) {
-            if (Character.isUpperCase(originalChar)) {
-                char shiftedChar = (char) ((originalChar - 'A' + n) % 26 + 'A');
-                result.append(shiftedChar);
-            } else if (Character.isLowerCase(originalChar)) {
-                char shiftedChar = (char) ((originalChar - 'a' + n) % 26 + 'a');
-                result.append(shiftedChar);
-            } else {
-                result.append(originalChar);
+            if('a'<=chars[i]&&'z'>=chars[i]){
+                if (charToInt>'z'){
+                    chars[i] = (char) i1;
+                }else{
+                    chars[i] = (char) charToInt;
+                }
             }
         }
-
-        return result.toString();
+        answer = new String(chars);
+        return answer;
     }
 }
