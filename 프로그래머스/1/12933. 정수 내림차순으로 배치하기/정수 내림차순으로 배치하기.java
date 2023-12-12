@@ -2,13 +2,14 @@ import java.util.*;
 
 class Solution {
     public long solution(long n) {
-        char[] charArray = String.valueOf(n).toCharArray();
-        Arrays.sort(charArray);
+        String str = String.valueOf(n);
+        char[] charArray = str.toCharArray();
+        char[] list = String.valueOf(n).toCharArray();
+        Arrays.sort(list);
 
-        // 배열을 내림차순으로 뒤집습니다.
-        String sortedStr = new StringBuilder(new String(charArray)).reverse().toString();
+        StringBuilder sb = new StringBuilder();
+        for (char c : list) sb.append(c);
 
-        // 문자열을 정수로 변환합니다.
-        return Long.parseLong(sortedStr);
+        return Long.parseLong(sb.reverse().toString());
     }
 }
