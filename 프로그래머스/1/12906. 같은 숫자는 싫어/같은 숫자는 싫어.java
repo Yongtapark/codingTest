@@ -3,8 +3,10 @@ import java.util.*;
 public class Solution {
     public int[] solution(int []arr) {
         List<Integer> answer = new ArrayList<>();
+        int tmpNum = 10;
         for(int i=0;i<arr.length;i++){
-            if (answer.isEmpty() || answer.get(answer.size() - 1) != arr[i]) {
+            if (tmpNum != arr[i]) {
+                tmpNum = arr[i];
                 answer.add(arr[i]);
             }
         }
