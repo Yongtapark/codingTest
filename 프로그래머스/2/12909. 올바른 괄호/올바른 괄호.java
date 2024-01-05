@@ -16,7 +16,7 @@ class Solution {
             }
             
         }
-        if(tmp[tmp.length-1]==')'&&tmp[0]=='('&&cnt ==0){
+        if(cnt ==0){
             answer = true;
         }else{
             answer = false;
