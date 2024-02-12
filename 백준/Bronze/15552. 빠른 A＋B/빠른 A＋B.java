@@ -13,8 +13,7 @@ public class Main {
             String[] input = bf.readLine().split(" ");
             int A = Integer.parseInt(input[0]);
             int B = Integer.parseInt(input[1]);
-            bw.write(Integer.toString(A+B));
-            bw.newLine();
+            bw.write((A+B)+"\n");
         }
         bw.flush();
     }
