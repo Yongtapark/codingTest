@@ -3,19 +3,14 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        String[] split = br.readLine().split(" ");
-        int count =0;
-        for(int i=0;i<split.length;i++){
-            if(!split[i].isBlank()){
-                count++;
-            }
-        }
-        bw.write(count+"\n");
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        bw.write(st.countTokens()+"\n");
         bw.flush();
     }
 }
