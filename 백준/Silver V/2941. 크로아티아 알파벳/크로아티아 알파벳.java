@@ -9,32 +9,32 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String sentence = br.readLine();
-        StringBuilder sb = new StringBuilder(sentence);
         String[] cAlpha = {"dz=", "c=", "c-", "d-", "lj", "nj", "s=", "z="};
         int count = 0;
 
-        for (int i = 0; i < sb.length();) {
-            boolean found = false;
+        for (int i = 0; i < sentence.length(); ) {
+            boolean isFound = false;
             for (int j = 0; j < cAlpha.length; j++) {
-                if (i <= sb.length() - 3 && cAlpha[j].equals(sb.substring(i, i + 3))) {
+                if (i <= sentence.length() - 3 && cAlpha[j].equals(sentence.substring(i, i+3))) {
+                    isFound = true;
                     i += 3;
                     count++;
-                    found = true;
                     break;
-                } else if (i <= sb.length() - 2 && cAlpha[j].equals(sb.substring(i, i + 2))) {
+                } else if (i <= sentence.length() - 2 && cAlpha[j].equals(sentence.substring(i, i+2))) {
+                    isFound = true;
                     i += 2;
                     count++;
-                    found = true;
                     break;
                 }
+
             }
-            if (!found) {
+            if (!isFound) {
                 i++;
                 count++;
             }
-        }
 
-        bw.write(count+"\n");
+        }
+        System.out.println(count);
 
         bw.flush();
     }
