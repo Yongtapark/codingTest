@@ -16,12 +16,12 @@ public class Main {
         for (int i = 0; i < sb.length();) {
             boolean found = false;
             for (int j = 0; j < cAlpha.length; j++) {
-                if (sb.length() > 2 && i <= sb.length() - 3 && cAlpha[j].equals(sb.substring(i, i + 3))) {
+                if (i <= sb.length() - 3 && cAlpha[j].equals(sb.substring(i, i + 3))) {
                     i += 3;
                     count++;
                     found = true;
                     break;
-                } else if (sb.length() > 1 && i <= sb.length() - 2 && cAlpha[j].equals(sb.substring(i, i + 2))) {
+                } else if (i <= sb.length() - 2 && cAlpha[j].equals(sb.substring(i, i + 2))) {
                     i += 2;
                     count++;
                     found = true;
