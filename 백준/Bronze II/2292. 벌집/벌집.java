@@ -9,13 +9,14 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(br.readLine());
+        int origin = 1;
+        int count = 1;
 
         if (N == 1) {
-            bw.write("1\n");
+            bw.write(count+ "\n");
         } else {
-            int origin = 1, count = 1;
             while (N > origin) {
-                origin += 6 * count; 
+                origin += 6 * count;
                 count++;
             }
             bw.write(count + "\n");
