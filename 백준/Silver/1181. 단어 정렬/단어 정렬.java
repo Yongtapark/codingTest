@@ -23,16 +23,9 @@ public class Main {
         });
 
         for(int i=0;i<N;i++){
-            for(int j =i+1; j<N;j++){
-                if(strArr[i].equals(strArr[j])){
-                    strArr[j] = "-1";
-                }
-            }
-        }
-
-
-        for(int i=0;i<N;i++){
-            if(!strArr[i].equals("-1")){
+            if(i!=0&&!strArr[i].equals(strArr[i-1])){
+                System.out.println(strArr[i]);
+            } else if (i==0) {
                 System.out.println(strArr[i]);
             }
         }
