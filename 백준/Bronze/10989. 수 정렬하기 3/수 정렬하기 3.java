@@ -10,13 +10,13 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(br.readLine());
 
-        int[] numbers = new int[20000001];
+        int[] numbers = new int[20001];
 
         for (int i = 0; i < N; i++) {
             numbers[Integer.parseInt(br.readLine())+10000]++;
         }
 
-        for(int i=0;i<20000001;i++){
+        for(int i=0;i<20001;i++){
             if(numbers[i]!=0){
                 for(int j=0; j<numbers[i];j++){
                     bw.write(i-10000+"\n");
