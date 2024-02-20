@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -11,15 +10,16 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(br.readLine());
 
-        int[] numbers = new int[N];
+        boolean[] numbers = new boolean[2000001];
 
         for (int i = 0; i < N; i++) {
-            numbers[i] = Integer.parseInt(br.readLine());
+            numbers[Integer.parseInt(br.readLine())+1000000] = true;
         }
 
-        Arrays.sort(numbers);
-        for(int i=0;i<N;i++){
-            bw.write(numbers[i]+"\n");
+        for(int i=0;i<2000001;i++){
+            if(numbers[i]){
+                bw.write(i-1000000+"\n");
+            }
         }
         bw.flush();
     }
