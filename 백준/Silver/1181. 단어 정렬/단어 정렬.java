@@ -24,9 +24,9 @@ public class Main {
 
         for(int i=0;i<N;i++){
             if(i!=0&&!strArr[i].equals(strArr[i-1])){
-                System.out.println(strArr[i]);
+                bw.write(strArr[i]+"\n");
             } else if (i==0) {
-                System.out.println(strArr[i]);
+                bw.write(strArr[i]+"\n");
             }
         }
         bw.flush();
