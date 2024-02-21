@@ -14,23 +14,25 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         HashMap<String, Integer> monsterNum = new HashMap<>();
-        String[] monsterName = new String[N+1];
+        String[] monsterName = new String[N + 1];
 
         for (int i = 0; i < N; i++) {
             String name = br.readLine();
-            monsterName[i+1] = name;
-            monsterNum.put(name, i+1);
+            monsterName[i + 1] = name;
+            monsterNum.put(name, i + 1);
         }
 
+        StringBuilder answer = new StringBuilder();
         for (int i = 0; i < M; i++) {
             String question = br.readLine();
-            try {
+            if (monsterNum.containsKey(question)) {
+                answer.append(monsterNum.get(question)).append("\n");
+            } else {
                 int monNum = Integer.parseInt(question);
-                bw.write(monsterName[monNum] + "\n");
-            } catch (NumberFormatException e) {
-                bw.write(monsterNum.get(question) + "\n");
+                answer.append(monsterName[monNum]).append("\n");
             }
         }
+        bw.write(answer.toString());
 
         bw.flush();
         bw.close();
