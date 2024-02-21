@@ -11,29 +11,28 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(br.readLine());
-        int[] myCard = new int[N];
-        HashSet<Integer> integers = new HashSet<>();
+        HashSet<Integer> cardsToCompare = new HashSet<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            myCard[i] = Integer.parseInt(st.nextToken());
-            integers.add(myCard[i]);
+            cardsToCompare.add(Integer.parseInt(st.nextToken()));
         }
 
         int M = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
-        int[][] cards = new int[M][1];
-        for(int i=0;i<M;i++){
-            if(!integers.add(Integer.parseInt(st.nextToken()))){
-                cards[i][0]=1;
+        int[] cards = new int[M];
+        for (int i = 0; i < M; i++) {
+            int cardNum = Integer.parseInt(st.nextToken());
+            if (cardsToCompare.contains(cardNum)) {
+                cards[i] = 1;
             }
         }
 
-        for(int i=0; i<M;i++){
-            bw.write(cards[i][0]+" ");
+        for (int i = 0; i < M; i++) {
+            bw.write(cards[i] + " ");
         }
 
-
-
         bw.flush();
+        bw.close();
+        br.close();
     }
 }
