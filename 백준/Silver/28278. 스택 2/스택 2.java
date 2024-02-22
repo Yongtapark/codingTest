@@ -36,48 +36,47 @@ public class Main {
         br.close();
     }
 
-    static class newStack {
-        private int[] arr = new int[1000000];
-        private int size = 0;
+}
 
-        public void push(int num) {
-            arr[size] = num;
-            size++;
-        }
+class newStack {
+    private int[] arr = new int[1000000];
+    private int size = 0;
 
-        public int poll() {
-            if (size == 0) {
-                return -1;
-            } else {
-                int lastElement = arr[size - 1];
-                arr[size] = 0;
-                size--;
-                return lastElement;
-            }
-        }
+    public void push(int num) {
+        arr[size] = num;
+        size++;
+    }
 
-        public int peek() {
-            if (size == 0) {
-                return -1;
-            }else {
-                return arr[size - 1];
-            }
-        }
-
-        public int size() {
-            return size;
-        }
-
-        public int isEmpty() {
-            if (size == 0) {
-                return 1;
-            } else {
-                return 0;
-            }
+    public int poll() {
+        if (size == 0) {
+            return -1;
+        } else {
+            int lastElement = arr[size - 1];
+            arr[size] = 0;
+            size--;
+            return lastElement;
         }
     }
 
+    public int peek() {
+        if (size == 0) {
+            return -1;
+        } else {
+            return arr[size - 1];
+        }
+    }
 
+    public int size() {
+        return size;
+    }
+
+    public int isEmpty() {
+        if (size == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
 
 
