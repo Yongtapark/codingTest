@@ -16,7 +16,7 @@ public class Main {
             if (split.length == 1 && split[0].equals(".")) {
                 break;
             }
-            if(split[split.length-1].equals(".")){
+            if (split[split.length - 1].equals(".")) {
                 String answer = getStackCheck(problem, split);
                 bw.write(answer + "\n");
             }
@@ -40,22 +40,19 @@ public class Main {
             if (split[j].equals(")")) {
                 if (stack.isEmpty() || !stack.peek().equals("(")) {
                     return "no";
+                }else{
+                    stack.pop();
                 }
-                stack.pop();
             }
             if (split[j].equals("]")) {
                 if (stack.isEmpty() || !stack.peek().equals("[")) {
                     return "no";
+                }else {
+                    stack.pop();
                 }
-                stack.pop();
             }
         }
-        if (stack.isEmpty()) {
-            answer = "yes";
-        }else{
-            answer = "no";
-        }
-        return answer;
+        return stack.isEmpty() ? "yes" : "no";
     }
 
 }
