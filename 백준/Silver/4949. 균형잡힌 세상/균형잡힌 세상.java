@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; ; i++) {
             String problem = br.readLine();
             String[] split = problem.split("");
@@ -18,9 +18,10 @@ public class Main {
             }
             if (split[split.length - 1].equals(".")) {
                 String answer = getStackCheck(problem, split);
-                bw.write(answer + "\n");
+                sb.append(answer).append("\n");
             }
         }
+        bw.write(sb.toString());
         bw.flush();
         bw.close();
         br.close();
