@@ -55,10 +55,12 @@ public class Main {
     static int m;
     static int n;
     static int[][] map;
-    static final int[] MOVE_UP_DOWN = {1, -1, 0, 0};
-    static final int[] MOVE_LEFT_RIGHT = {0, 0, -1, 1};
+
 
     private static int bfs(LinkedList<int[]> queue) {
+        final int[] MOVE_UP_DOWN = {1, -1, 0, 0};
+        final int[] MOVE_LEFT_RIGHT = {0, 0, -1, 1};
+
         while (!queue.isEmpty()) {
             int[] nextStep = queue.poll();
             int currY = nextStep[0];
@@ -75,11 +77,10 @@ public class Main {
                     moveCount[moveY][moveX] = moveCount[currY][currX] + 1;
                     queue.offer(new int[]{moveY, moveX});
                 }
+                if (leftTomato == 0) {
+                    return moveCount[moveY][moveX];
+                }
             }
-            if (leftTomato == 0) {
-                return moveCount[currY][currX]+1;
-            }
-
         }
         return -1;
 
