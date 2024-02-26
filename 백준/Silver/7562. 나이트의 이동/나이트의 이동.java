@@ -24,11 +24,9 @@ public class Main {
             int targetY = Integer.parseInt(st.nextToken());
             int targetX = Integer.parseInt(st.nextToken());
 
-            moveCount = new int[oneSide + 1][oneSide + 1];
-            isVisited = new boolean[oneSide + 1][oneSide + 1];
-
-            int[][] map = new int[oneSide + 1][oneSide + 1];
-
+            moveCount = new int[oneSide][oneSide];
+            isVisited = new boolean[oneSide][oneSide];
+            
             int[] current = {currentY, currentX};
             int[] target = {targetY, targetX};
             int answer = bfs(current, target);
@@ -48,6 +46,8 @@ public class Main {
     static int oneSide;
 
     private static int bfs(int[] current, int[] target) {
+        final int[] MOVE_UP_DOWN = {2, 2, -2, -2, -1, 1, -1, 1};
+        final int[] MOVE_LEFT_RIGHT = {1, -1, 1, -1, -2, -2, 2, 2};
         LinkedList<int[]> queue = new LinkedList<int[]>();
         int curY = current[0];
         int curX = current[1];
@@ -62,11 +62,9 @@ public class Main {
 
                 return moveCount[nextY][nextX] - 1;
             }
-            int[] moveUpAndDown = {2, 2, -2, -2, -1, 1, -1, 1};
-            int[] moveLeftAndRight = {1, -1, 1, -1, -2, -2, 2, 2};
             for (int i = 0; i < 8; i++) {
-                int moveY = nextY + moveUpAndDown[i];
-                int moveX = nextX + moveLeftAndRight[i];
+                int moveY = nextY + MOVE_UP_DOWN[i];
+                int moveX = nextX + MOVE_LEFT_RIGHT[i];
                 if (moveY >= 0 && moveY < oneSide && moveX >= 0 && moveX < oneSide) {
                     if (!isVisited[moveY][moveX] && moveCount[moveY][moveX] == 0) {
                         isVisited[moveY][moveX] = true;
