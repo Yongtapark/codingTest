@@ -33,7 +33,7 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (map[i][j] == 1) {
+                if (map[i][j] == 1 && moveCount[i][j]==0) {
                     queue.offer(new int[]{i, j});
                 }
             }
