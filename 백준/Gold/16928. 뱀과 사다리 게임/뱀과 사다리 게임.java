@@ -14,10 +14,8 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         chanceCount = Integer.parseInt(st.nextToken());
         trapCount = Integer.parseInt(st.nextToken());
-        moveCount = new int[101];
         int[][] chance = new int[chanceCount][2];
         int[][] trap = new int[trapCount][2];
-        int[] map = new int[100];
         for (int i = 0; i < chanceCount; i++) {
             st = new StringTokenizer(br.readLine());
             chance[i][0] = Integer.parseInt(st.nextToken());
@@ -28,7 +26,7 @@ public class Main {
             trap[i][0] = Integer.parseInt(st.nextToken());
             trap[i][1] = Integer.parseInt(st.nextToken());
         }
-        int answer = bfs(chance, trap);
+        int answer = bfs(chance, trap, 1, 100);
         sb.append(answer).append("\n");
 
         bw.write(sb.toString());
@@ -43,7 +41,7 @@ public class Main {
     static int[] moveCount;
 
 
-    private static int bfs(int[][] chance, int[][] trap) {
+    private static int bfs(int[][] chance, int[][] trap, int start, int goal) {
         //변동되는사항
         //주사위
         //함정
@@ -65,10 +63,10 @@ public class Main {
         //  if ( 현재위치 == 타겟){
         //      return 주사위 던진 횟수
         //  }
-        final int START = 1;
+        moveCount = new int[start+goal];
         final int[] dice = {1, 2, 3, 4, 5, 6};
         LinkedList<Integer> queue = new LinkedList<>();
-        queue.offer(START);
+        queue.offer(start);
         while (!queue.isEmpty()) {
             Integer current = queue.poll();
             for (int i = 0; i < 6; i++) {
@@ -84,13 +82,13 @@ public class Main {
                     }
                 }
 
-                if (move >= 0 && move <= 100 && moveCount[move]==0) {
+                if (move >= 0 && move <= 100 && moveCount[move] == 0) {
                     moveCount[move] = moveCount[current] + 1;
                     queue.add(move);
                 }
             }
-            if(current==100){
-                return moveCount[100];
+            if (current == goal) {
+                return moveCount[goal];
             }
         }
         return -1;
