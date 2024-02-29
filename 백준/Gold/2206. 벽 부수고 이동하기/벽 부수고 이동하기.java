@@ -33,36 +33,35 @@ public class Main {
     }
 
     static int bfs(int[][] map, int y, int x) {
-        int[] upAndDown = new int[]{-1, 1, 0, 0};
-        int[] leftAndRight = new int[]{0, 0, -1, 1};
+        int[] upDown = {-1, 1, 0, 0};
+        int[] leftRight = {0, 0, -1, 1};
         int[][][] visitCount = new int[2][y][x];
         LinkedList<int[]> queue = new LinkedList<>();
-        visitCount[0][0][0] = 1;
         queue.offer(new int[]{0, 0, 0});
+        visitCount[0][0][0] = 1;
+
         while (!queue.isEmpty()) {
-            int[] next = queue.poll();
-            int currZ = next[0];
-            int currY = next[1];
-            int currX = next[2];
+            int[] curr = queue.poll();
+            int currZ = curr[0];
+            int currY = curr[1];
+            int currX = curr[2];
             for (int i = 0; i < 4; i++) {
-                int nextY = currY + upAndDown[i];
-                int nextX = currX + leftAndRight[i];
+                int nextY = currY + upDown[i];
+                int nextX = currX + leftRight[i];
                 if (nextY >= 0 && nextY < y && nextX >= 0 && nextX < x) {
-                    if (map[nextY][nextX] == 1 && visitCount[1][nextY][nextX] == 0 &&currZ==0) {
-                        visitCount[1][nextY][nextX] = visitCount[currZ][currY][currX] + 1;
-                        queue.add(new int[]{1, nextY, nextX});
-                    } else if (map[nextY][nextX] == 0 && visitCount[currZ][nextY][nextX] == 0
-                            && visitCount[0][nextY][nextX] != 1) {
+                    if (map[nextY][nextX] == 1 && visitCount[1][nextY][nextX] == 0 && currZ == 0) {
+                        visitCount[1][nextY][nextX] = visitCount[0][currY][currX] + 1;
+                        queue.offer(new int[]{1, nextY, nextX});
+                    } else if (map[nextY][nextX] == 0 && visitCount[0][nextY][nextX] == 0 && visitCount[currZ][nextY][nextX] == 0) {
                         visitCount[currZ][nextY][nextX] = visitCount[currZ][currY][currX] + 1;
-                        queue.add(new int[]{currZ, nextY, nextX});
+                        queue.offer(new int[]{currZ, nextY, nextX});
                     }
                 }
             }
-            if (currY == y-1 && currX == x-1) {
+            if (currY == y - 1 && currX == x - 1) {
                 return visitCount[currZ][currY][currX];
             }
         }
-
         return -1;
     }
 
