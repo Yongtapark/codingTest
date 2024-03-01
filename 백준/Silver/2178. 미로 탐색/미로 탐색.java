@@ -6,74 +6,61 @@ import java.io.OutputStreamWriter;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        sb = new StringBuilder();
-
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        //int r = Integer.parseInt(st.nextToken());
 
-        map = new int[n+1][m+1];
-        isVisited = new boolean[n+1][m+1];
-        distance = new int[n+1][m+1];
+        int[][] map = new int[n][m];
+        isVisited = new int[n][m];
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
             String[] split = br.readLine().split("");
-            for (int j = 1; j <= m; j++) {
-                map[i][j] = Integer.parseInt(split[j-1]);
+            for (int j = 0; j < m; j++) {
+                map[i][j] = Integer.parseInt(split[j]);
             }
         }
 
-        dfs(1,1);
+        int count = bfs(map, n, m);
 
-        sb.append(distance[n][m]).append("\n");
-
-
+        sb.append(count).append("\n");
         bw.write(sb.toString());
+
         bw.flush();
         bw.close();
         br.close();
 
     }
 
-    static int n;
-    static int m;
-    static int[][] map;
-    static boolean[][] isVisited;
-    static int[][] distance;
-    static StringBuilder sb = new StringBuilder();
+    static int[][] isVisited;
 
-    static int dfs(int y, int x) {
+    static int bfs(int[][] map, int y, int x) {
+        int[] upDown = {-1, 1, 0, 0};
+        int[] leftRight = {0, 0, -1, 1};
         LinkedList<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{y,x});
-        isVisited[y][x] = true;
-        distance[y][x] = 1;
-        int[] dy = {1, -1, 0, 0};
-        int[] dx = {0, 0, -1, 1};
-
-        while (!queue.isEmpty()){
-            int[] current = queue.poll();
-
-            int curY = current[0];
-            int curX = current[1];
-
-            if(curY == n && curX == m){
-                return distance[curY][curX];
-            }
+        isVisited[0][0] = 1;
+        queue.offer(new int[]{0, 0});
+        while (!queue.isEmpty()) {
+            int[] curr = queue.poll();
+            int currY = curr[0];
+            int currX = curr[1];
             for (int i = 0; i < 4; i++) {
-                int ny = curY + dy[i];
-                int nx = curX + dx[i];
-                if (ny >= 0 && ny <= n && nx >= 0 && nx <= m) {
-                    if (!isVisited[ny][nx] && map[ny][nx] != 0) {
-                        isVisited[ny][nx] = true;
-                        distance[ny][nx] = distance[curY][curX]+1;
-                        queue.offer(new int[]{ny,nx});
+                int nextY = currY + upDown[i];
+                int nextX = currX + leftRight[i];
+                if (nextY >= 0 && nextY < y && nextX >= 0 && nextX < x) {
+                    if (map[nextY][nextX] == 1 && isVisited[nextY][nextX]==0) {
+                        isVisited[nextY][nextX] = isVisited[currY][currX]+1;
+                        queue.offer(new int[]{nextY, nextX});
                     }
                 }
+            }
+            if (currY == y - 1 && currX == x - 1) {
+                return isVisited[currY][currX];
             }
         }
         return -1;
