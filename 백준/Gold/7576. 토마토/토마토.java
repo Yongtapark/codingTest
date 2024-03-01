@@ -11,38 +11,37 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        m = Integer.parseInt(st.nextToken());
-        n = Integer.parseInt(st.nextToken());
-        map = new int[n][m];
-        leftTomato = 0;
 
+        StringTokenizer st = new StringTokenizer(br.readLine());
+         m = Integer.parseInt(st.nextToken());
+         n = Integer.parseInt(st.nextToken());
+        int[][] map = new int[n][m];
+        isVisited = new int[n][m];
+        int zeroCount =0;
         for (int i = 0; i < n; i++) {
             String[] split = br.readLine().split(" ");
             for (int j = 0; j < m; j++) {
-                int num = Integer.parseInt(split[j]);
-                map[i][j] = num;
-                if (num == 0) {
-                    leftTomato++;
+                map[i][j] = Integer.parseInt(split[j]);
+                if (map[i][j]==0){
+                    zeroCount++;
                 }
             }
         }
-
-        moveCount = new int[n][m];
         LinkedList<int[]> queue = new LinkedList<>();
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (map[i][j] == 1 && moveCount[i][j]==0) {
-                    queue.offer(new int[]{i, j});
+                if(map[i][j]==1){
+                    queue.offer(new int[]{i,j});
+                    isVisited[i][j] = 1;
                 }
             }
         }
-        int answer= 0;
-        if(leftTomato!=0){
-            answer = bfs(queue);
+        int answer =0;
+        if(zeroCount!=0){
+            answer = bfs(zeroCount, queue,map);
         }
         sb.append(answer).append("\n");
+
         bw.write(sb.toString());
         bw.flush();
         bw.close();
@@ -50,40 +49,35 @@ public class Main {
 
     }
 
-    static int[][] moveCount;
-    static int leftTomato;
-    static int m;
+    static int[][] isVisited;
     static int n;
-    static int[][] map;
+    static int m;
 
-
-    private static int bfs(LinkedList<int[]> queue) {
-        final int[] MOVE_UP_DOWN = {1, -1, 0, 0};
-        final int[] MOVE_LEFT_RIGHT = {0, 0, -1, 1};
+    static int bfs(int zeroCount,LinkedList<int[]> queue,int[][] map) {
+        int[] height = {1, -1, 0, 0};
+        int[] level = {0, 0, -1, 1};
 
         while (!queue.isEmpty()) {
-            int[] nextStep = queue.poll();
-            int currY = nextStep[0];
-            int currX = nextStep[1];
-
+            int[] curr = queue.poll();
+            int currY = curr[0];
+            int currX = curr[1];
             for (int i = 0; i < 4; i++) {
-
-                int moveY = currY + MOVE_UP_DOWN[i];
-                int moveX = currX + MOVE_LEFT_RIGHT[i];
-
-                if (moveY >= 0 && moveY < n && moveX >= 0 && moveX < m && map[moveY][moveX] == 0) {
-                    map[moveY][moveX] = 1;
-                    leftTomato--;
-                    moveCount[moveY][moveX] = moveCount[currY][currX] + 1;
-                    queue.offer(new int[]{moveY, moveX});
+                int nextY = currY + height[i];
+                int nextX = currX + level[i];
+                if (nextY >= 0 && nextY < n && nextX >= 0 && nextX < m) {
+                    if (isVisited[nextY][nextX] == 0 && map[nextY][nextX]!=-1) {
+                        isVisited[nextY][nextX] = isVisited[currY][currX] + 1;
+                        queue.offer(new int[]{nextY, nextX});
+                        zeroCount--;
+                    }
                 }
-                if (leftTomato == 0) {
-                    return moveCount[moveY][moveX];
-                }
+            }
+            if(zeroCount==0){
+                return isVisited[currY][currX];
             }
         }
         return -1;
-
     }
+
 
 }
